@@ -24,8 +24,8 @@ FCnaija App	</description>
     <preference name="android-installLocation" value="auto" />
     <preference name="BackgroundColor" value="0xffffffff "/>
     <preference name="KeepRunning" value="true"/>
-    <preference name="phonegap-version" value="cli-6.1.0" />
-    <preference name="permissions" value="none"/>
+    <preference name='phonegap-version' value='cli-6.5.0' />
+    <preference name='pgb-builder-version' value='2' />
 	<icon src="images/logo.png" gap:platform="android" gap:density="ldpi" />
 	<icon src="images/logo.png" gap:platform="android" gap:density="mdpi" />
 	<icon src="images/logo.png" gap:platform="android" gap:density="hdpi" />
@@ -44,6 +44,7 @@ FCnaija App	</description>
     <plugin name="cordova-plugin-console" spec="~1.1.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="~3.0.0" />
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
+    <access origin="*" subdomains="true" />
 
     
     
