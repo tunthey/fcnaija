@@ -4,16 +4,16 @@
 	id        = "com.binarysoft.emumap"
 	versionCode="1"
 	version   = "1.0">
-    <name>Shift Clocker</name>
+    <name>FCNaija App</name>
     <description>
-Shift Clocking Made easy	</description>
+FCnaija App	</description>
 <author href="google.com" email="aderinwaletunde@gmail.com">
-Tunde Aderinwale
+70th Precinct Limited
 </author>
     <gap:platform name="ios" />
     <gap:platform name="android" />
     <gap:platform name="winphone" />
-    <preference name="phonegap-version" value="3.3.0" />
+    <preference name="phonegap-version" value="6.5.0" />
     <preference name="orientation" value="portrait" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="false" />
