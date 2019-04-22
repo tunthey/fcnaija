@@ -36,12 +36,9 @@ FCnaija App	</description>
     <gap:splash src="images/logo.png" gap:platform="android" gap:density="xhdpi" />
     <gap:splash src="images/logo.png" gap:platform="android" gap:density="xxhdpi" />
 	
-	<feature name="http://api.phonegap.com/1.7.1/file-transfer"/>
-    <feature name="http://api.phonegap.com/4.0.1/geolocation"/>
-    <feature name="http://api.phonegap.com/2.0.1/network"/>
 
-    <gap:plugin name="org.apache.cordova.file" version="1.7.1" />
-    <gap:plugin name="org.apache.cordova.file-transfer" version="1.7.1" />
+    <gap:plugin name="org.apache.cordova.file" />
+    <gap:plugin name="org.apache.cordova.file-transfer" />
     <gap:plugin name="org.apache.cordova.geolocation"  />
     <gap:plugin name="org.apache.cordova.dialogs"  />
     <gap:plugin name="org.apache.cordova.device"  />
