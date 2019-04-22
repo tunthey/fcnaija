@@ -1,0 +1,953 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+    <script src="css/jquery-1.11.0.js" type="text/javascript"></script>
+    <script src="css/jquery.mobile-1.4.5.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="themes/mycustomtheme.min.css" />
+	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="js/adminappscript.js" type="text/javascript"></script>
+	<title>Admin</title>
+	<style type="text/css">
+		.alert-danger {
+			background-color: #f9e8e8;
+			border-color: #f4d5d3;
+			color: #FF0000;
+			}
+		.banner {
+			display:block;
+			width: 100%;
+		}
+
+	</style>
+<script id="panel-init">
+  $(function() {
+            $( "body>[data-role='panel']" ).panel().enhanceWithin();;
+            $( "[data-role='header'], [data-role='footer']" ).toolbar();
+            });
+    
+  </script>
+
+	<header data-role="header" data-position="fixed" data-theme="a">
+     <h2>EMU Location Finder</h2>
+		 <a href="#adminlanding" rel="external" data-icon="bars" data-role="button" class="ui-btn ui-icon-bars ui-btn-icon-left" data-iconshadow="false">Menu</a>
+
+		  <a href="index.html" rel="external" data-icon="home" data-role="button"  data-iconshadow="false">Home</a>
+
+    </header> 
+
+    <footer data-role="footer" data-position="fixed" data-theme="a">
+      <h2>Copyright &copy All Right Reserved</h2>
+    </footer>
+
+
+</head>
+<body data-theme="a">
+
+<div data-role="page" data-theme="a" id="adminloginpage">
+<header data-role="header" data-position="fixed" data-theme="a">
+    <h2>EMU Location Finder</h2>
+    <a href="index.html" rel="external" data-icon="home" data-role="button" data-iconshadow="false">Home</a>
+    </header>
+<div data-role="content" class="content">
+		<div align="center"><h1>Admin Login</h1>
+			<p class="alert-danger" id="errordiv" data-dismiss="alert"></p>
+		</div>
+		<section>
+			 <form method="post" id="loginform" >
+          <input type="text" name="username" id="username" value="" required placeholder="Enter Username"/>
+          <input type="password" name="password" id="password" value="" required placeholder="Enter password"/>
+          <input type="button" id="subbtn" value="Login" onclick="authenticate()"/>
+
+        </form>
+        <p>Forget Password? <a href="#reset_password">click here</a></p>
+
+		</section>
+</div>
+<footer data-role="footer" data-position="fixed" data-theme="a">
+      <h2>Copyright &copy All Right Reserved</h2>
+    </footer>
+</div>
+
+ <!-- Admin Landing page-->
+<div data-role="page" data-theme="b" id="adminlanding">
+	
+<div data-role="content" class="content">
+	<br>
+	<h1 align="center">ADMIN PANEL</h1>
+	<br> <br>
+		 <ul data-role="listview">
+                <li><a href="#manage_cafeteria">Manage Cafeteria</a></li>
+                <li><a href="#manage_lecturehall">Manage Lecture Hall</a></li>
+                <li><a href="#manage_building">Manage Building</a></li>
+                <li><a href="#manage_office">Manage Office</a></li>
+                <li><a href="#manage_busstop">Manage Bus Stop</a></li>
+                <li><a href="#accountmnt">Account</a></li>
+                <li><a href="#manage_atm">Atm's</a></li>
+                <li><a href="#others">Others</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- Forget Password page-->
+<div data-role="page" data-theme="a" id="reset_password">
+  <header data-role="header" data-position="fixed" data-theme="a">
+     <h2>EMU Location Finder</h2>
+
+      <a href="index.html" rel="external" data-icon="home" data-role="button"  data-iconshadow="false">Home</a>
+
+    </header> 
+<div data-role="content" class="content">
+  <br>
+  <h1 align="center">Forget Password</h1>
+  <br> <br>
+   <p align="center" id="forgetpasserror" data-dismiss="alert"></p>
+  <form method="post" id="forgetpasswordform" >
+    <input type="text" name="username" id="username" value="" required placeholder="Enter Username"/>
+    <input type="email" name="email" id="password" value="" required placeholder="Enter email"/>
+    <input type="submit" id="forgetsubmitbtn" value="Reset Password" />
+
+  </form>
+
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- accountmnt Management page-->
+<div data-role="page" data-theme="b" id="accountmnt">
+<div data-role="content" class="content">
+  <br>
+  <h1 align="center">Account Management</h1>
+  <br> <br>
+   <ul data-role="listview">
+                <li><a href="#addadmin">Add New Admin</a></li>
+                <li><a href="#updateadmin">Change Password</a></li>
+ </ul>
+</div>
+</div>
+
+<!--end of page-->
+
+<!-- Add New admin page-->
+<div data-role="page" data-theme="a" id="addadmin">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Add New Admin</h3></div>
+  <form id="addnadmin" data-ajax="false">
+     <label for="admusername">Admin Username:</label>
+        <input type="text" name="admusername" id="admusername" value="" required placeholder="Username"/>
+       <label for="admemail">Admin Email:</label>
+        <input type="email" name="admemail" id="admemail" value="" required placeholder="Email"/>
+         <label for="amdpassword">Admin Password:</label>
+        <input type="password" name="amdpassword" id="amdpassword" value="" required placeholder="password"/>
+            <input type="submit" name="submit" value="Add Admin">
+            
+  </form>
+</div>
+</div>
+
+<!--end of page-->
+
+
+
+<!-- Update New admin page-->
+<div data-role="page" data-theme="a" id="updateadmin">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Change Password</h3></div>
+  <form id="chmpsadmin" data-ajax="false">
+        <label for="chnpassword">New Password:</label>
+        <input type="password" name="chnpassword" id="chnpassword" value="" required placeholder="password"/>
+        <input type="hidden" id="chnusername" name="chnusername" />
+            <input type="submit" name="submit" value="Change Password">
+            
+  </form>
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- Other Management page-->
+<div data-role="page" data-theme="b" id="others">
+<div data-role="content" class="content">
+  <br>
+  <h1 align="center">Others Activities</h1>
+  <br> <br>
+   <ul data-role="listview">
+                <li><a href="#" onclick="load_library_details()">Update Library Info</a></li>
+                <li><a href="#" onclick="load_library_details_for_cover()">Update Library Cover</a></li>
+                <li><a href="#" onclick="load_gym_details()">Update Sport Center Info</a></li>
+                <li><a href="#" onclick="load_church_details()">Update Church Info</a></li>
+                <li><a href="#" onclick="load_mosque_details()">Update Mosque Info</a></li>
+ </ul>
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- Cafeteria Management page-->
+<div data-role="page" data-theme="b" id="manage_cafeteria">
+<div data-role="content" class="content">
+	<br>
+	<h1 align="center">Cafeteria Management</h1>
+	<br> <br>
+	 <ul data-role="listview">
+      <li><a href="#addcafeteria">Add New Cafeteria</a></li>
+      <li><a href="#updatecafe" onclick="load_all_cafe()">Update Cafeteria</a></li>
+      <li><a href="#" onclick="load_all_cafe_for_cover()">Update Cafeteria Cover Photo</a></li>
+      <li><a href="#" onclick="load_all_cafe_for_delete()">Delete Cafeteria</a></li>
+                
+
+     </ul>
+</div>
+</div>
+<!-- End of cafeteria -->
+
+
+<!-- Lecture Management page-->
+<div data-role="page" data-theme="b" id="manage_lecturehall">
+<div data-role="content" class="content">
+  <br>
+  <h1 align="center">Lecture Hall Management</h1>
+  <br> <br>
+   <ul data-role="listview">
+      <li><a href="#addlecturehall">Add New Lecture Hall</a></li>
+      <li><a href="#" onclick="load_all_lecture()">Update Lecture Hall</a></li>
+      <li><a href="#" onclick="load_all_lecture_for_delete()">Delete Lecture Hall</a></li>
+                
+
+     </ul>
+</div>
+</div>
+<!-- End of cafeteria -->
+
+
+
+<!-- Building Management page-->
+<div data-role="page" data-theme="b" id="manage_building">
+<div data-role="content" class="content">
+  <br>
+  <h1 align="center">Building Management</h1>
+  <br> <br>
+   <ul data-role="listview">
+      <li><a href="#addbuilding">Add New Building</a></li>
+      <li><a href="#" onclick="load_all_building()">Update Building</a></li>
+      <li><a href="#" onclick="load_all_building_for_cover()">Update Building Cover Photo</a></li>
+      <li><a href="#" onclick="load_all_building_for_delete()">Delete Building</a></li>
+                
+
+     </ul>
+</div>
+</div>
+<!-- End of cafeteria -->
+
+
+<!-- Office Management page-->
+<div data-role="page" data-theme="b" id="manage_office">
+<div data-role="content" class="content">
+  <br>
+  <h1 align="center">Office Management</h1>
+  <br> <br>
+   <ul data-role="listview">
+      <li><a href="#addoffice">Add New Office</a></li>
+      <li><a href="#" onclick="load_all_office()">Update Office</a></li>
+      <li><a href="#" onclick="load_all_office_for_delete()">Delete Office</a></li>
+                
+
+     </ul>
+</div>
+</div>
+<!-- End of cafeteria -->
+
+
+<!-- ATM Management page-->
+<div data-role="page" data-theme="b" id="manage_atm">
+<div data-role="content" class="content">
+  <br>
+  <h1 align="center">ATM Management</h1>
+  <br> <br>
+   <ul data-role="listview">
+      <li><a href="#addatm">Add New ATM</a></li>
+      <li><a href="#" onclick="load_all_atm()">Update ATM</a></li>
+      <li><a href="#" onclick="load_all_atm_for_delete()">Delete ATM</a></li>
+                
+
+     </ul>
+</div>
+</div>
+<!-- End of ATM Management -->
+
+
+<!-- Bus Stop Management page-->
+<div data-role="page" data-theme="b" id="manage_busstop">
+<div data-role="content" class="content">
+  <br>
+  <h1 align="center">Bus Stop Management</h1>
+  <br> <br>
+   <ul data-role="listview">
+      <li><a href="#addbusstop">Add New Bus Stop</a></li>
+      <li><a href="#" onclick="load_all_busstop()">Update Bus Stop</a></li>
+      <li><a href="#" onclick="load_all_busstop_for_delete()">Delete Bus Stop</a></li>
+                
+
+     </ul>
+</div>
+</div>
+<!-- End of Bus Stop Management -->
+
+
+<!-- Cafeteria list page-->
+<div data-role="page" data-theme="a" id="cafe_list">
+<div data-role="content" class="content" data-theme="b">
+  <br>
+  <h3 align="center">Please Select</h3>
+  <br>
+  <div id="cafe_content_list">
+
+  </div>
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- Lecture list page-->
+<div data-role="page" data-theme="a" id="lecture_list">
+<div data-role="content" class="content" data-theme="b">
+  <br>
+  <h3 align="center">Please Select</h3>
+  <br>
+  <div id="lecture_content_list">
+
+  </div>
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- Lecture list page-->
+<div data-role="page" data-theme="a" id="office_list">
+<div data-role="content" class="content" data-theme="b">
+  <br>
+  <h3 align="center">Please Select</h3>
+  <br>
+  <div id="office_content_list">
+
+  </div>
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- ATM list page-->
+<div data-role="page" data-theme="a" id="atm_list">
+<div data-role="content" class="content" data-theme="b">
+  <br>
+  <h3 align="center">Please Select</h3>
+  <br>
+  <div id="atm_content_list">
+
+  </div>
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- Busstop list page-->
+<div data-role="page" data-theme="a" id="busstop_list">
+<div data-role="content" class="content" data-theme="b">
+  <br>
+  <h3 align="center">Please Select</h3>
+  <br>
+  <div id="busstop_content_list">
+
+  </div>
+</div>
+</div>
+
+<!--end of page-->
+
+<!-- Building list page-->
+<div data-role="page" data-theme="a" id="building_list">
+<div data-role="content" class="content" data-theme="b">
+  <br>
+  <h3 align="center">Please Select</h3>
+  <br>
+  <div id="building_content_list">
+
+  </div>
+</div>
+</div>
+
+<!--end of page-->
+
+
+
+<!-- Cafeteria details page-->
+<div data-role="page" data-theme="a" id="cafe_details">
+<div data-role="content" class="content" data-theme="a">
+  <br>
+  <h3>Cafeteria Details</h3>
+  <br>
+  <div id="cafe_details_area">
+  </div>
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- Update Library info page-->
+<div data-role="page" data-theme="a" id="update_library">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Library Info</h3></div>
+
+  <form id="update_library_form" method="post" data-ajax="false">
+     <label for="libraryname" >Library Name:</label>
+            <input type="text" name="libraryname" id="libraryname" value="" required placeholder="Name"/>
+            <label for="library_opening_hour">Opening Hour:</label>
+            <input type="text" name="library_opening_hour" id="library_opening_hour" value="" required placeholder="Opening Hour"/>  
+            <label for="library_closing_hour">Closing Hour:</label>
+            <input type="text" name="library_closing_hour" id="library_closing_hour" value="" required placeholder="Closing Hour"/> 
+             <label for="library_lat">Latitude:</label>
+            <input type="text" name="library_lat" id="library_lat" value="" required placeholder="Latitude" />
+             <label for="library_long">Longtitude:</label>
+            <input type="text" name="library_long" id="library_long" value="" required placeholder="Longitude" />
+           <a href="#" onclick="get_library_position()">Click here to set your current position for lat and long</a>
+           <label for="library_info">Brief Info:</label>
+          <textarea id="library_info" name="library_info" placeholder="Brief Info"></textarea>
+          <label for="library_email">Email:</label>
+            <input type="text" name="library_email" id="library_email" value="" required placeholder="Email" />
+          <label for="library_website">Website:</label>
+            <input type="text" name="library_website" id="library_website" value="" required placeholder="Website" />
+    <input type="submit" value="Update Info" />
+  </form>
+
+</div>
+</div>
+
+<!--end of page-->
+
+
+
+<!-- Update Sport Center info page-->
+<div data-role="page" data-theme="a" id="update_gym">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Sport Center Info</h3></div>
+
+  <form id="update_sport_form" method="post" data-ajax="false">
+     <label for="sportname" >Name:</label>
+            <input type="text" name="sportname" id="sportname" value="" required placeholder="Name"/>
+             <label for="sport_info">Brief Info:</label>
+          <textarea id="sport_info" name="sport_info" placeholder="Brief Info"></textarea>
+            <label for="sport_opening_hour">Opening Hour:</label>
+            <input type="text" name="sport_opening_hour" id="sport_opening_hour" value="" required placeholder="Opening Hour"/>  
+            <label for="sport_closing_hour">Closing Hour:</label>
+            <input type="text" name="sport_closing_hour" id="sport_closing_hour" value="" required placeholder="Closing Hour"/> 
+             <label for="sport_lat">Latitude:</label>
+            <input type="text" name="sport_lat" id="sport_lat" value="" required placeholder="Latitude" />
+             <label for="sport_long">Longtitude:</label>
+            <input type="text" name="sport_long" id="sport_long" value="" required placeholder="Longitude" />
+           <a href="#" onclick="get_sport_position()">Click here to set your current position for lat and long</a>
+    <input type="submit" value="Update Info" />
+  </form>
+
+</div>
+</div>
+
+<!--end of page-->
+
+
+
+<!-- Update Church info page-->
+<div data-role="page" data-theme="a" id="update_church">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Church Info</h3></div>
+
+  <form id="update_church_form" method="post" data-ajax="false">
+     <label for="churchname" >Name:</label>
+            <input type="text" name="churchname" id="churchname" value="" required placeholder="Name"/>
+             <label for="church_info">Brief Info:</label>
+          <textarea id="church_info" name="church_info" placeholder="Brief Info"></textarea>
+            <label for="church_opening_hour">Opening Hour:</label>
+            <input type="text" name="church_opening_hour" id="church_opening_hour" value="" required placeholder="Opening Hour"/>  
+            <label for="church_closing_hour">Closing Hour:</label>
+            <input type="text" name="church_closing_hour" id="church_closing_hour" value="" required placeholder="Closing Hour"/> 
+             <label for="church_lat">Latitude:</label>
+            <input type="text" name="church_lat" id="church_lat" value="" required placeholder="Latitude" />
+             <label for="church_long">Longtitude:</label>
+            <input type="text" name="church_long" id="church_long" value="" required placeholder="Longitude" />
+           <a href="#" onclick="get_church_position()">Click here to set your current position for lat and long</a>
+    <input type="submit" value="Update Info" />
+  </form>
+
+</div>
+</div>
+
+<!--end of page-->
+
+
+
+<!-- Update Mosque info page-->
+<div data-role="page" data-theme="a" id="update_mosque">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Mosque Info</h3></div>
+
+  <form id="update_mosque_form" method="post" data-ajax="false">
+     <label for="mosquename" >Name:</label>
+            <input type="text" name="mosquename" id="mosquename" value="" required placeholder="Name"/>
+             <label for="mosque_info">Brief Info:</label>
+          <textarea id="mosque_info" name="mosque_info" placeholder="Brief Info"></textarea>
+            <label for="mosque_opening_hour">Opening Hour:</label>
+            <input type="text" name="mosque_opening_hour" id="mosque_opening_hour" value="" required placeholder="Opening Hour"/>  
+            <label for="mosque_closing_hour">Closing Hour:</label>
+            <input type="text" name="mosque_closing_hour" id="mosque_closing_hour" value="" required placeholder="Closing Hour"/> 
+             <label for="mosque_lat">Latitude:</label>
+            <input type="text" name="mosque_lat" id="mosque_lat" value="" required placeholder="Latitude" />
+             <label for="mosque_long">Longtitude:</label>
+            <input type="text" name="mosque_long" id="mosque_long" value="" required placeholder="Longitude" />
+           <a href="#" onclick="get_mosque_position()">Click here to set your current position for lat and long</a>
+    <input type="submit" value="Update Info" />
+  </form>
+
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- add Lecture page-->
+<div data-role="page" data-theme="a" id="addlecturehall">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Add New Lecture Hall</h3></div>
+  <p class="alert-danger" id="addlecturehallerrordiv" data-dismiss="alert"></p>
+  <form id="add_lecturehall_form" method="post" data-ajax="false">
+     <label for="lechallname" >Lecture Hall Name:</label>
+            <input type="text" name="lechallname" id="lechallname" value="" required placeholder="Name"/>
+            <label for="lecture_opening_hour">Opening Hour:</label>
+            <input type="text" name="lecture_opening_hour" id="lecture_opening_hour" value="" required placeholder="Opening Hour"/>  
+            <label for="lecture_closing_hour">Closing Hour:</label>
+            <input type="text" name="lecture_closing_hour" id="lecture_closing_hour" value="" required placeholder="Closing Hour"/> 
+             <label for="lecture_lat">Latitude:</label>
+            <input type="text" name="lecture_lat" id="lecture_lat" value="" required placeholder="Latitude" />
+             <label for="lecture_long">Longtitude:</label>
+            <input type="text" name="lecture_long" id="lecture_long" value="" required placeholder="Longitude" />
+           <a href="#" onclick="get_lecturehall_position()">Click here to set your current position for lat and long</a>
+           <label for="lecture_info">Brief Info:</label>
+          <textarea id="lecture_info" name="lecture_info" placeholder="Brief Info"></textarea>
+    <input type="submit" value="Add Lecture Hall" />
+  </form>
+</div>
+</div>
+
+<!--end of page-->
+
+<!-- Update Lecture page-->
+<div data-role="page" data-theme="a" id="updatelecturehall">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Lecture Hall</h3></div>
+  <p class="alert-danger" id="addlecturehallerrordiv" data-dismiss="alert"></p>
+  <form id="update_lecturehall_form" method="post" data-ajax="false">
+     <label for="uplechallname" >Lecture Hall Name:</label>
+            <input type="text" name="uplechallname" id="uplechallname" value="" required placeholder="Name"/>
+            <label for="uplecture_opening_hour">Opening Hour:</label>
+            <input type="text" name="uplecture_opening_hour" id="uplecture_opening_hour" value="" required placeholder="Opening Hour"/>  
+            <label for="uplecture_closing_hour">Closing Hour:</label>
+            <input type="text" name="uplecture_closing_hour" id="uplecture_closing_hour" value="" required placeholder="Closing Hour"/> 
+             <label for="uplecture_lat">Latitude:</label>
+            <input type="text" name="uplecture_lat" id="uplecture_lat" value="" required placeholder="Latitude" />
+             <label for="uplecture_long">Longtitude:</label>
+            <input type="text" name="uplecture_long" id="uplecture_long" value="" required placeholder="Longitude" />
+           <a href="#" onclick="get_lecturehall_position()">Click here to set your current position for lat and long</a>
+           <label for="uplecture_info">Brief Info:</label>
+          <textarea id="uplecture_info" name="uplecture_info" placeholder="Brief Info"></textarea>
+          <input type="hidden" value="" name="lecture_hall_id" id="lecture_hall_id" />
+    <input type="submit" value="Update Lecture Hall" />
+  </form>
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- Update Office page-->
+<div data-role="page" data-theme="a" id="updateoffice">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Office</h3></div>
+<form id="update_officeform" method="post" data-ajax="false">
+            <label for="upoffice_no">Office No:</label>
+            <input type="text" name="upoffice_no" id="upoffice_no" value="" required placeholder="Office No"/>  
+             <label for="upstaff_name">Staff Name:</label>
+            <textarea id="upstaff_name" name="upstaff_name" placeholder="Staff Name"></textarea>
+           <label for="upoffice_lat">Lat:</label>
+           <input type="text" name="upoffice_lat" id="upoffice_lat" required placeholder="Latitude" />
+
+           <label for="upoffice_lng">Long:</label>
+           <input type="text" name="upoffice_lng" id="upoffice_lng" required placeholder="Longitude" />
+           <a href="#" onclick="get_office_position()">Click here to set your current position for lat and long</a>
+           <label for="upoffice_ohr">Opening Hours:</label>
+           <input type="text" name="upoffice_ohr" id="upoffice_ohr" required placeholder="Opening Hour" />
+           <label for="upoffice_chr">Closing Hours:</label>
+           <input type="text" name="upoffice_chr" id="upofficechr" required placeholder="Closing Hour" />
+           <input type="hidden" name="office_id_update" id="office_id_update" />
+    <input type="submit" value="Update Office" />
+  </form>
+</div>
+</div>
+
+<!--end of page-->
+
+
+
+
+
+<!-- Update ATM page-->
+<div data-role="page" data-theme="a" id="updateatm">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update ATM</h3></div>
+    <form id="update_atmform" method="post" data-ajax="false">
+             <label for="upatm_name">ATM Name:</label>
+            <input type="text" name="upatm_name" id="upatm_name" value="" required placeholder="ATM name"/>  
+            <label for="upatm_currency">Currency Available</label>
+            <input type="text" name="upatm_currency" id="upatm_currency" value="" required placeholder="USD,EURO,etc"/>  
+             <label for="upatm_dscpt">ATM Description:</label>
+            <textarea id="upatm_dscpt" name="upatm_dscpt" placeholder="ATM Description"></textarea>
+           <label for="upatm_lat">Lat:</label>
+           <input type="text" name="upatm_lat" id="upatm_lat" required placeholder="Latitude" />
+           <label for="upatm_lng">Long:</label>
+           <input type="text" name="upatm_lng" id="upatm_lng" required placeholder="Longitude" />
+           <a href="#" onclick="get_atm_position()">Click here to set your current position for lat and long</a>
+           <input type="hidden" name="update_atm_id" id="update_atm_id" />
+    <input type="submit" value="Update ATM" />
+  </form>
+
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- Update Bus stop page-->
+<div data-role="page" data-theme="a" id="updatebusstop">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Bus Stop</h3></div>
+    <form id="update_busstopform" method="post" data-ajax="false">
+             <label for="upbusstop_name">Bus Stop Name:</label>
+            <input type="text" name="upbusstop_name" id="upbusstop_name" value="" required placeholder="ATM name"/>  
+           <label for="upbusstop_lat">Lat:</label>
+           <input type="text" name="upbusstop_lat" id="upbusstop_lat" required placeholder="Latitude" />
+           <label for="upbusstop_lng">Long:</label>
+           <input type="text" name="upbusstop_lng" id="upbusstop_lng" required placeholder="Longitude" />
+           <a href="#" onclick="get_busstop_position()">Click here to set your current position for lat and long</a>
+           <input type="hidden" name="update_busstop_id" id="update_busstop_id" />
+    <input type="submit" value="Update Bus Stop" />
+  </form>
+
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- Update Building page-->
+<div data-role="page" data-theme="a" id="updatebuildinghall">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Building</h3></div>
+  <form id="update_buildingform" method="post" enctype="multipart/form-data" data-ajax="false">
+            <label for="upbuilding_name">Building Name:</label>
+            <input type="text" name="upbuilding_name" id="upbuilding_name" value="" required placeholder="Building Name"/>  
+             <label for="upbuilding_dscpt">Building Description:</label>
+            <textarea id="upbuilding_dscpt" name="upbuilding_dscpt" placeholder="Building Description"></textarea>
+           <label for="upbuilding_lat">Lat:</label>
+           <input type="text" name="upbuilding_lat" id="upbuilding_lat" required placeholder="Latitude" />
+
+           <label for="upbuilding_lng">Long:</label>
+           <input type="text" name="upbuilding_lng" id="upbuilding_lng" required placeholder="Longitude" />
+           <a href="#" onclick="get_building_position()">Click here to set your current position for lat and long</a>
+           <label for="upbuilding_ohr">Opening Hours:</label>
+           <input type="text" name="upbuilding_ohr" id="upbuilding_ohr" required placeholder="Longitude" />
+           <label for="upbuilding_chr">Closing Hours:</label>
+           <input type="text" name="upbuilding_chr" id="upbuildingchr" required placeholder="Longitude" />
+           <input type="hidden" name="building_update_id" id="building_update_id" />
+    <input type="submit" value="Update Building" />
+  </form>
+</div>
+</div>
+
+<!--end of page-->
+
+
+
+<!-- updatecafeteria page-->
+<div data-role="page" data-theme="a" id="updatecafeteria">
+<div data-role="content" class="content">
+  <div align="center"><br><h4>Update Cafeteria</h4></div>
+
+
+            <div class="ui-grid">
+                <div class="ui-block-a">
+                 
+                    <input type="text" name="searchfield" id="searchfield" placeholder="Cafeteria Name" />
+                 
+                </div>
+               
+                    <a href="#" name="searchbtn" id="searchbtn" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-search ui-btn-inline ui-nodisc-icon ui-alt-icon" onclick="loadcourseinfo()"> </a>
+               
+          </div>
+      <br /> <hr>
+
+        <div id="updateformpane">
+         
+        </div>
+        <p id="upprogresspane" align="center"></p>
+  <input type="hidden" name="ccodefordelte" id="ccodefordelte" />
+  
+ 
+</div>
+</div>
+
+<!--end of page-->
+
+<!-- update CAfe photo page-->
+<div data-role="page" data-theme="a" id="updatecafe_photo">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Cafe Photograph</h3></div>
+   <hr>
+        <div id="eupdatecafeformpane">
+          <img id="cafeimg" src="" alt="Cafe image" width="170" height="170" >
+          <p id="cafebtdetails"></p>
+           <form id="upload_cafephoto" enctype="multipart/form-data" data-ajax="false">
+            <input type="hidden" name="cafeupdateid" id="cafeupdateid" />
+            <input type="file" name="uploadphoto" required id="uploadphoto" />
+            <input type="submit" value="Upload Cafeteria Cover" id="submitupsft" />
+           </form>
+
+        </div>
+        <p id="eupstafprogresspane" align="center"></p>
+  
+  
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- update Building photo page-->
+<div data-role="page" data-theme="a" id="updatebuilding_photo">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Building Photograph</h3></div>
+   <hr>
+        <div id="eupdatecafeformpane">
+          <img id="buildingimg" src="" alt="Building image" width="170" height="170" >
+          <p id="buildingbtdetails"></p>
+           <form id="upload_buildingphoto" enctype="multipart/form-data" data-ajax="false">
+            <input type="hidden" name="buildingupdateid" id="buildingupdateid" />
+            <input type="file" name="uploadphoto" required id="uploadphoto" />
+            <input type="submit" value="Upload Building Cover" id="submitupsft" />
+           </form>
+
+        </div>
+        <p id="eupstafprogresspane" align="center"></p>
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- update Library photo page-->
+<div data-role="page" data-theme="a" id="updatelibrary_photo">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Library Cover</h3></div>
+   <hr>
+        <div id="eupdatecafeformpane">
+          <img id="libraryimg" src="" alt="Library image" width="170" height="170" >
+          <p id="librarybtdetails"></p>
+           <form id="upload_libraryphoto" enctype="multipart/form-data" data-ajax="false">
+            <input type="file" name="uploadphoto" required id="uploadphoto" />
+            <input type="submit" value="Upload Library Cover" id="submitupsft" />
+           </form>
+
+        </div>
+        <p id="eupstafprogresspane" align="center"></p>
+</div>
+</div>
+
+<!--end of page-->
+
+<!-- addcafeteria page-->
+<div data-role="page" data-theme="a" id="addcafeteria">
+<div data-role="content" class="content">
+	<div align="center"><br><h3>Add New Cafeteria</h3></div>
+  <p class="alert-danger" id="addcafeteriaerrordiv" data-dismiss="alert"></p>
+
+<form id="add_cafeteria" method="post" enctype="multipart/form-data" data-ajax="false">
+            <label for="cafe_name">Cafeteria Name:</label>
+            <input type="text" name="cafe_name" id="cafe_name" value="" required placeholder="Cafeteria Name"/>  
+             <label for="cafe_dscpt">Cafeteria Description:</label>
+            <textarea id="cafe_dscpt" name="cafe_dscpt" placeholder="Cafeteria Description"></textarea>
+             <label for="photo">Cover Photo:</label>
+            <input type="file" name="photo" id="photo" />
+
+           <label for="cafeteria_lat">Lat:</label>
+           <input type="text" name="cafeteria_lat" id="cafeteria_lat" required placeholder="Latitude" />
+
+           <label for="cafeteria_lng">Long:</label>
+           <input type="text" name="cafeteria_lng" id="cafeteria_lng" required placeholder="Longitude" />
+           <a href="#" onclick="get_cafeteria_position()">Click here to set your current position for lat and long</a>
+    <input type="submit" value="Add Cafeteria" />
+  </form>
+  <p id="progresspane" align="center"></p>
+</div>
+</div>
+
+<!--end of page-->
+
+<!-- addbuilding page-->
+<div data-role="page" data-theme="a" id="addbuilding">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Add New Building</h3></div>
+<form id="add_buildingform" method="post" enctype="multipart/form-data" data-ajax="false">
+            <label for="building_name">Building Name:</label>
+            <input type="text" name="building_name" id="building_name" value="" required placeholder="Building Name"/>  
+             <label for="building_dscpt">Building Description:</label>
+            <textarea id="building_dscpt" name="building_dscpt" placeholder="Building Description"></textarea>
+             <label for="photo">Cover Photo:</label>
+            <input type="file" name="photo" id="photo" />
+
+           <label for="building_lat">Lat:</label>
+           <input type="text" name="building_lat" id="building_lat" required placeholder="Latitude" />
+
+           <label for="building_lng">Long:</label>
+           <input type="text" name="building_lng" id="building_lng" required placeholder="Longitude" />
+           <a href="#" onclick="get_building_position()">Click here to set your current position for lat and long</a>
+           <label for="building_ohr">Opening Hours:</label>
+           <input type="text" name="building_ohr" id="building_ohr" required placeholder="Longitude" />
+           <label for="building_chr">Closing Hours:</label>
+           <input type="text" name="building_chr" id="buildingchrg" required placeholder="Longitude" />
+    <input type="submit" value="Add Building" />
+  </form>
+  <p id="progresspane" align="center"></p>
+</div>
+</div>
+
+<!--end of page-->
+
+
+
+<!-- addoffice page-->
+<div data-role="page" data-theme="a" id="addoffice">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Add New Office</h3></div>
+<form id="add_officeform" method="post" data-ajax="false">
+            <label for="office_no">Office No:</label>
+            <input type="text" name="office_no" id="office_no" value="" required placeholder="Office No"/>  
+             <label for="staff_name">Staff Name:</label>
+            <textarea id="staff_name" name="staff_name" placeholder="Staff Name"></textarea>
+           <label for="office_lat">Lat:</label>
+           <input type="text" name="office_lat" id="office_lat" required placeholder="Latitude" />
+
+           <label for="office_lng">Long:</label>
+           <input type="text" name="office_lng" id="office_lng" required placeholder="Longitude" />
+           <a href="#" onclick="get_office_position()">Click here to set your current position for lat and long</a>
+           <label for="office_ohr">Opening Hours:</label>
+           <input type="text" name="office_ohr" id="office_ohr" required placeholder="Longitude" />
+           <label for="office_chr">Closing Hours:</label>
+           <input type="text" name="office_chr" id="officechr" required placeholder="Longitude" />
+    <input type="submit" value="Add Office" />
+  </form>
+  <p id="progresspane" align="center"></p>
+</div>
+</div>
+
+<!--end of page-->
+
+<!-- addatm page-->
+<div data-role="page" data-theme="a" id="addatm">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Add New ATM</h3></div>
+<form id="add_atmform" method="post" data-ajax="false">
+             <label for="atm_name">ATM Name:</label>
+            <input type="text" name="atm_name" id="atm_name" value="" required placeholder="ATM name"/>  
+            <label for="atm_currency">Currency Available</label>
+            <input type="text" name="atm_currency" id="atm_currency" value="" required placeholder="USD,EURO,etc"/>  
+             <label for="atm_dscpt">ATM Description:</label>
+            <textarea id="atm_dscpt" name="atm_dscpt" placeholder="ATM Description"></textarea>
+           <label for="atm_lat">Lat:</label>
+           <input type="text" name="atm_lat" id="atm_lat" required placeholder="Latitude" />
+           <label for="atm_lng">Long:</label>
+           <input type="text" name="atm_lng" id="atm_lng" required placeholder="Longitude" />
+           <a href="#" onclick="get_atm_position()">Click here to set your current position for lat and long</a>
+    <input type="submit" value="Add ATM" />
+  </form>
+  <p id="progresspane" align="center"></p>
+</div>
+</div>
+
+<!--end of page-->
+
+
+<!-- addbusstop page-->
+<div data-role="page" data-theme="a" id="addbusstop">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Add Bus Stop</h3></div>
+<form id="add_busstopform" method="post" data-ajax="false">
+             <label for="busstop_name">Bus Stop Name:</label>
+            <input type="text" name="busstop_name" id="busstop_name" value="" required placeholder="Bus Stop name"/>  
+           <label for="busstop_lat">Lat:</label>
+           <input type="text" name="busstop_lat" id="busstop_lat" required placeholder="Latitude" />
+           <label for="busstop_lng">Long:</label>
+           <input type="text" name="busstop_lng" id="busstop_lng" required placeholder="Longitude" />
+           <a href="#" onclick="get_busstop_position()">Click here to set your current position for lat and long</a>
+    <input type="submit" value="Add Bus Stop" />
+  </form>
+  <p id="progresspane" align="center"></p>
+</div>
+</div>
+
+<!--end of page-->
+
+
+
+
+<!-- This page will be displayed as a dialog -->
+    <div id="adminerrorpage" data-role="page" data-dialog="true" data-close-btn="right" data-theme="a">
+        <div data-role="header">
+          <h1>Request Fail</h1>
+        </div>
+        <div class="ui-content">
+          <p>An error occured! <br />
+             Please check that you are connected to the internet
+          </p>
+        </div>
+       
+    </div>
+
+
+<!-- This page will be displayed as a dialog -->
+    <div id="adminsuccesspage" data-role="page" data-dialog="true" data-close-btn="right" data-theme="a">
+        <div data-role="header">
+          <h1>Request Successful</h1>
+        </div>
+        <div class="ui-content">
+          <p id="sucessmsg">
+          </p>
+        </div>
+       
+    </div>
+
+<!-- Global Values to use in script -->
+<input type="hidden" name="global_adminusername" id="global_adminusername" />
+
+</body>
+</html>
