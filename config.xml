@@ -24,6 +24,8 @@ FCnaija App	</description>
     <preference name="android-installLocation" value="auto" />
     <preference name="BackgroundColor" value="0xffffffff "/>
     <preference name="KeepRunning" value="true"/>
+    <preference name='phonegap-version' value='cli-7.0.1' />
+    <preference name='pgb-builder-version' value='1' />
 	<icon src="images/logo.png" gap:platform="android" gap:density="ldpi" />
 	<icon src="images/logo.png" gap:platform="android" gap:density="mdpi" />
 	<icon src="images/logo.png" gap:platform="android" gap:density="hdpi" />
