@@ -32,7 +32,6 @@ FCnaija App	</description>
 	<icon src="images/logo.png" gap:platform="android" gap:density="xhdpi" />
 	<icon src="images/logo.png" gap:platform="android" gap:density="xxhdpi" />
     <preference name="SplashScreen" value="screen" />
-    <splash src="images/logo.png" />
 		
 	<gap:splash src="images/logo.png" gap:platform="android" gap:density="ldpi" />
     <gap:splash src="images/logo.png" gap:platform="android" gap:density="mdpi" />
