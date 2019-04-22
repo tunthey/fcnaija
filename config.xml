@@ -36,13 +36,15 @@ FCnaija App	</description>
     <gap:splash src="images/logo.png" gap:platform="android" gap:density="xhdpi" />
     <gap:splash src="images/logo.png" gap:platform="android" gap:density="xxhdpi" />
 	
-
-    <gap:plugin name="org.apache.cordova.geolocation"  />
-    <gap:plugin name="org.apache.cordova.dialogs"  />
-    <gap:plugin name="org.apache.cordova.device"  />
-    <gap:plugin name="org.apache.cordova.network-information"  />
-    <gap:plugin name="org.apache.cordova.console"  />
-    <gap:plugin name="org.apache.cordova.inappbrowser"  />
+    <plugin name="cordova-plugin-geolocation" spec="~4.0.1" />
+    <plugin name="cordova-plugin-dialogs" spec="~2.0.1" />
+    <plugin name="cordova-plugin-device" spec="~2.0.2" />
+    <plugin name="cordova-plugin-file" spec="~6.0.1" />
+    <plugin name="cordova-plugin-file-transfer" spec="~1.7.1" />
+    <plugin name="cordova-plugin-network-information" spec="~2.0.1" />
+    <plugin name="cordova-plugin-console" spec="~1.1.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~3.0.0" />
+    <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <access origin="*" subdomains="true" />
 
     
